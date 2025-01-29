@@ -1,0 +1,9 @@
+{
+  "name": "VioletspaceOS",
+  "short_name": "VioletSpOS",
+  "description": "A web OS designed for a wide range of tasks and providing utilities",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#6700AC",
+  "background_color": "#6700AC"
+}
