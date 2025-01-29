@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>VioletspaceOS</title>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <link rel="stylesheet" href="https://jeffreymaniac.github.io/SpacefriendsJS/spacefriends.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="author" content="JaecadeJnight" />
+  </head>
+  <body>
+    <nav style="position:absolute;width:100%">
+      <div style="left:2px;position:absolute">
+        <button hidden class="ibtn" onclick="search()" id="topUIsearch">
+      <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M17 17L21 21" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 11C3 15.4183 6.58172 19 11 19C13.213 19 15.2161 18.1015 16.6644 16.6493C18.1077 15.2022 19 13.2053 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+
+        <button class="ibtn" onclick="spf.toggleFullScreen()">
+      <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M7 4H4V7" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 4H20V7" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 20H4V17" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 20H20V17" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+    </div>
+    <br>
+    <div style="position:absolute;right:2px">
+      <button hidden onclick="vextensions()" class="ibtn" id="topUIextensions">
+      <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M4 14V18.4C4 18.7314 4.26863 19 4.6 19H10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19 14V18.4C19 18.7314 18.7314 19 18.4 19H14" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 5H18.4C18.7314 5 19 5.26863 19 5.6V10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 10V5.6C4 5.26863 4.26863 5 4.6 5H10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 19V20C14 21.1046 13.1046 22 12 22C10.8954 22 10 21.1046 10 20V19" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 10H5C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14H4" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19 10H20C21.1046 10 22 10.8954 22 12C22 13.1046 21.1046 14 20 14H19" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 5V4C14 2.89543 13.1046 2 12 2C10.8954 2 10 2.89543 10 4V5" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+      <a href="https://github.com/Jeffreymaniac/SpacefriendsJS" class="ibtn" target="_blank">
+      <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M16 22.0268V19.1568C16.0375 18.68 15.9731 18.2006 15.811 17.7506C15.6489 17.3006 15.3929 16.8902 15.06 16.5468C18.2 16.1968 21.5 15.0068 21.5 9.54679C21.4997 8.15062 20.9627 6.80799 20 5.79679C20.4558 4.5753 20.4236 3.22514 19.91 2.02679C19.91 2.02679 18.73 1.67679 16 3.50679C13.708 2.88561 11.292 2.88561 8.99999 3.50679C6.26999 1.67679 5.08999 2.02679 5.08999 2.02679C4.57636 3.22514 4.54413 4.5753 4.99999 5.79679C4.03011 6.81549 3.49251 8.17026 3.49999 9.57679C3.49999 14.9968 6.79998 16.1868 9.93998 16.5768C9.61098 16.9168 9.35725 17.3222 9.19529 17.7667C9.03334 18.2112 8.96679 18.6849 8.99999 19.1568V22.0268" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 20.0267C6 20.9999 3.5 20.0267 2 17.0267" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      Github
+      </a>
+    </div>
+    </nav>
+    <main id="lockscreen" class='cursorheart'>
+      <h1>VioletspaceOS</h1>
+      <div>
+      <toy-button class="colorThingie" onclick="startVioletUp()"><span class="centerVAH">Start</span></toy-button>
+      <p>Pressing start will initialize the application for you and do stuff.</p>
+      </div>
+      <div style="padding-top:200px;float:right;width:25%">
+      <p>Credits to <a target="_blank" style="background-color:white" href="https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/">Free SVG Backgrounds and Patterns by SVGBackgrounds.com</a> for the purple homescreen design</p>
+      </div>
+    </main>
+    <div id="xVioletOS" class="violetOS cursor quantumGradient" role="application" hidden>
+      <div style="width:100px!important" inert> .</div>
+      <hr><hr>
+      <svg height="0" width="0" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+  <defs>
+  <clipPath id="svg-shape">
+<path d="M100,200c43.8,0,68.2,0,84.1-15.9C200,168.2,200,143.8,200,100s0-68.2-15.9-84.1C168.2,0,143.8,0,100,0S31.8,0,15.9,15.9C0,31.8,0,56.2,0,100s0,68.2,15.9,84.1C31.8,200,56.2,200,100,200z" />
+    </clipPath>
+    </defs>
+</svg>
+
+<!--  <img src="https://picsum.photos/400/" class="squircle">-->
+<button><img src="https://cdn-icons-png.flaticon.com/512/794/794647.png"></button>
+<button><img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-rating-icon.png"></button>
+<button><img src="https://play-lh.googleusercontent.com/Wiupt6RN7s4Ujn9RVmRnrHdznTsdidimHFAFCfOwYICqvdxB0R_zYFnSV4tHvFvwN3vo=w240-h480-rw"></button>
+
+    </div>
+
+    <script src="https://jeffreymaniac.github.io/SpacefriendsJS/script.js"></script>
+
+  </body>
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+
+  <script src="/script.js"></script>
+  <script type="module" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</html>
